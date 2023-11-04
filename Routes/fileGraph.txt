@@ -1,0 +1,23 @@
+project-root/
+  ├── app.js (or server.js)
+  ├── routes/
+  |   ├── foodRoutes.js
+  |   ├── authRoutes.js
+  ├── controllers/
+  |   ├── foodController.js
+  |   ├── authController.js
+  ├── models/
+  |   ├── foodModel.js
+  |   ├── userModel.js
+  ├── middleware/
+  |   ├── authenticationMiddleware.js
+  |   ├── authorizationMiddleware.js
+  ├── config/
+  |   ├── database.js
+  |   ├── auth.js
+  ├── public/
+  |   ├── css/
+  |   ├── js/
+  ├── views/
+  |   ├── index.ejs
+  └── ...

@@ -1,0 +1,306 @@
+[
+      {
+        "foodName": "Spaghetti Bolognese",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Italian",
+        "price": 12.99,
+        "orders": 0,
+        "quantity": 250,
+        "made by": "Chef Mario",
+        "food origin": "Italy",
+        "description": "A classic Italian dish made with pasta, ground beef, tomato sauce, and aromatic herbs.",
+         "reviews": [
+            {
+              "customer_name": "PastaLover123",
+              "rating": 4.8,
+              "comment": "Delicious spaghetti with a rich and savory sauce!",
+              "date": "2023-11-15"
+            },
+            {
+              "customer_name": "FoodieChef88",
+              "rating": 4.5,
+              "comment": "Great Italian classic, perfectly cooked pasta.",
+              "date": "2023-11-16"
+            },
+            {
+              "customer_name": "TasteExplorer",
+              "rating": 4.9,
+              "comment": "A taste of Italy right at home!",
+              "date": "2023-11-17"
+            }
+          ]
+      },
+      {
+        "foodName": "Sushi Rolls",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Japanese",
+        "price": 16.99,
+        "orders": 0,
+        "quantity": 150,
+        "made by": "Sushi Master Yuki",
+        "food origin": "Japan",
+        "description": "Delicious sushi rolls with fresh fish, rice, and seaweed, served with soy sauce and wasabi.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Chicken Tikka Masala",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Indian",
+        "price": 14.99,
+        "orders": 0,
+        "quantity": 200,
+        "made by": "Chef Patel",
+        "food origin": "India",
+        "description": "Tender pieces of chicken in a creamy tomato-based sauce with aromatic Indian spices.",
+        "reviews": [
+            {
+              "customer_name": "SpiceEnthusiast",
+              "rating": 4.6,
+              "comment": "Perfectly spiced chicken, loved the flavors.",
+              "date": "2023-11-21"
+            },
+            {
+              "customer_name": "IndianFoodie",
+              "rating": 4.8,
+              "comment": "A great Indian dish, very satisfying.",
+              "date": "2023-11-22"
+            },
+            {
+              "customer_name": "CurryLover99",
+              "rating": 4.7,
+              "comment": "Tasty and authentic Indian cuisine!",
+              "date": "2023-11-23"
+            }
+          ]
+      },
+      {
+        "foodName": "Hamburger",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "American",
+        "price": 8.99,
+        "orders": 0,
+        "quantity": 300,
+        "made by": "Grill Master Jack",
+        "food origin": "United States",
+        "description": "Classic hamburger with a juicy patty, lettuce, tomato, and special sauce.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Pad Thai",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Thai",
+        "price": 11.99,
+        "orders": 0,
+        "quantity": 180,
+        "made by": "Chef Nong",
+        "food origin": "Thailand",
+        "description": "Stir-fried rice noodles with shrimp, tofu, and a tangy tamarind sauce.",
+        "reviews": [
+            {
+              "customer_name": "TamarindTango",
+              "rating": 4.9,
+              "comment": "Tangy and delicious Pad Thai, loved the balance of flavors.",
+              "date": "2023-11-27"
+            },
+            {
+              "customer_name": "NoodleNirvana",
+              "rating": 4.8,
+              "comment": "Authentic Thai taste, excellent dish!",
+              "date": "2023-11-28"
+            },
+            {
+              "customer_name": "TofuLover55",
+              "rating": 4.7,
+              "comment": "Great Pad Thai with the perfect combination of ingredients.",
+              "date": "2023-11-29"
+            }
+          ]
+      },
+      {
+        "foodName": "Margarita Pizza",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Italian",
+        "price": 10.99,
+        "orders": 0,
+        "quantity": 220,
+        "made by": "Pizza Chef Luigi",
+        "food origin": "Italy",
+        "description": "Traditional Italian pizza with tomato sauce, mozzarella, and fresh basil.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Sashimi Platter",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Japanese",
+        "price": 18.99,
+        "orders": 0,
+        "quantity": 160,
+        "made by": "Sushi Chef Hiroshi",
+        "food origin": "Japan",
+        "description": "Assortment of fresh raw fish slices served with pickled ginger and wasabi.",
+        "reviews": [
+            {
+              "customer_name": "SashimiSensation",
+              "rating": 4.9,
+              "comment": "Top-quality sashimi, a delightful experience!",
+              "date": "2023-12-03"
+            },
+            {
+              "customer_name": "SushiArtisan",
+              "rating": 4.8,
+              "comment": "Exquisite sashimi platter, a true work of art!",
+              "date": "2023-12-04"
+            },
+            {
+              "customer_name": "FreshFishFan",
+              "rating": 5.0,
+              "comment": "Incredible sashimi, the freshness is unmatched!",
+              "date": "2023-12-05"
+            }
+          ]
+      },
+      {
+        "foodName": "Chana Masala",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Indian",
+        "price": 13.99,
+        "orders": 0,
+        "quantity": 190,
+        "made by": "Chef Priya",
+        "food origin": "India",
+        "description": "A flavorful chickpea curry with spices and herbs, perfect for vegetarians.",
+        "reviews":[]
+      },
+      {
+        "foodName": "BBQ Ribs",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "American",
+        "price": 14.99,
+        "orders": 0,
+        "quantity": 280,
+        "made by": "Pitmaster Bill",
+        "food origin": "United States",
+        "description": "Slow-cooked, tender barbecue ribs with a smoky and tangy sauce.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Green Curry",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Thai",
+        "price": 12.99,
+        "orders": 0,
+        "quantity": 175,
+        "made by": "Chef Achara",
+        "food origin": "Thailand",
+        "description": "A spicy Thai curry with coconut milk, chicken, and aromatic herbs.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Lasagna",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Italian",
+        "price": 11.99,
+        "orders": 0,
+        "quantity": 210,
+        "made by": "Chef Gabriella",
+        "food origin": "Italy",
+        "description": "Layered pasta dish with ricotta, mozzarella, and a rich meat sauce.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Miso Soup",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Japanese",
+        "price": 4.99,
+        "orders": 0,
+        "quantity": 350,
+        "made by": "Soup Master Yuki",
+        "food origin": "Japan",
+        "description": "A traditional Japanese soup with soybean paste, tofu, and seaweed.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Ramen",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Japanese",
+        "price": 9.99,
+        "orders": 0,
+        "quantity": 190,
+        "made by": "Ramen Chef Yuki",
+        "food origin": "Japan",
+        "description": "Japanese noodle soup with savory broth, pork, and various toppings.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Biryani",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Indian",
+        "price": 13.99,
+        "orders": 0,
+        "quantity": 210,
+        "made by": "Chef Arjun",
+        "food origin": "India",
+        "description": "A fragrant and flavorful Indian rice dish with spices, meat, and vegetables.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Pho",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Vietnamese",
+        "price": 10.99,
+        "orders": 0,
+        "quantity": 180,
+        "made by": "Pho Chef Linh",
+        "food origin": "Vietnam",
+        "description": "Vietnamese noodle soup with a rich, aromatic broth, beef, and fresh herbs.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Samosa",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Indian",
+        "price": 2.99,
+        "orders": 0,
+        "quantity": 280,
+        "made by": "Samosa Maker Priya",
+        "food origin": "India",
+        "description": "Deep-fried pastry filled with spiced potatoes, peas, and other ingredients.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Fish and Chips",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "British",
+        "price": 9.99,
+        "orders": 0,
+        "quantity": 250,
+        "made by": "Fish and Chips Shop John",
+        "food origin": "United Kingdom",
+        "description": "Classic British dish with battered fish and deep-fried potato chips.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Tacos",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Mexican",
+        "price": 7.99,
+        "orders": 0,
+        "quantity": 320,
+        "made by": "Taco Chef Maria",
+        "food origin": "Mexico",
+        "description": "Mexican street food with folded tortillas, various fillings, and salsa.",
+        "reviews":[]
+      },
+      {
+        "foodName": "Peking Duck",
+        "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
+        "foodCategory": "Chinese",
+        "price": 18.99,
+        "orders": 0,
+        "quantity": 170,
+        "made by": "Duck Master Li",
+        "food origin": "China",
+        "description": "Crispy roasted duck dish with thin pancakes, hoisin sauce, and sliced scallions.",
+        "reviews":[]
+      }
+    ]
