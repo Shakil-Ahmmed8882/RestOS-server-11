@@ -16,7 +16,7 @@ app.use(
 );
 app.use(cookieParser())
 
-// MiddleWares
+
 // verify token
 const verifyToken = (req, res, next) => {
   const token = req?.cookies?.token;
@@ -33,11 +33,12 @@ const verifyToken = (req, res, next) => {
 };
 
 
+
 //|| MONGODB connection
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://shakilahmmed8882:7aSz3nq3EGaqFdeJ@cluster0.sk8jxpx.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.sk8jxpx.mongodb.net/?retryWrites=true&w=majority`;
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+// Creating a MongoClient 
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -49,11 +50,17 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
 
+    //Creating database and colleciton 
     const database = client.db("RestOS");
     const foodColleciton = database.collection("FoodCollection");
 
-    
-    app.get("/food", async (req, res) => {
+
+
+
+
+
+    // GET ALL FOOD
+    app.get("/foods", async (req, res) => {
       try{
         const result = await foodColleciton.find().toArray();
         res.send(result);
@@ -62,6 +69,25 @@ async function run() {
         console.log(err)
       }
     });
+
+    // 6 TOP SELLING FOOD
+    app.get("/top-selling-food", async (req, res) => {
+      try{
+        const result = await foodColleciton.find().sort({ orders: -1 }).limit(6).toArray();
+        res.send(result);
+      }
+      catch(err){
+        console.log(err)
+      }
+    });
+
+
+
+
+
+
+
+
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
