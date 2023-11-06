@@ -87,10 +87,22 @@ async function run() {
     app.get('/food/:id',async(req,res)=> {
       const id = req.params.id
       const query = {_id: new ObjectId(id)}
-      console.log(id)
+
 
       const result = await foodColleciton.findOne(query)
       res.send(result)
+    })
+
+        // added food collection
+    app.get("/added-food", async (req, res) => {
+      try {
+        const { email } = req.query;
+        console.log(email)
+        const result = await addedFoodCollection.find({ add_by: email }).toArray();
+        res.send(result);
+      } catch (err) {
+        console.log(err);
+      }
     })
 
     // Store user in database
@@ -108,17 +120,26 @@ async function run() {
       res.send(result)      
     })
 
-    // added food collection
-    app.get("/added-food", async (req, res) => {
-      try {
-        const { email } = req.query;
-        console.log(email)
-        const result = await addedFoodCollection.find({ add_by: email }).toArray();
-        res.send(result);
-      } catch (err) {
-        console.log(err);
+    // update orders count
+    app.patch('/orders-count',async(req,res)=>{
+      const {id} = req.body
+      const orders = req.body.orders
+        // const orders = req.body.orders
+        console.log(orders)
+
+      const query = {_id:new ObjectId(id)}
+      const updatedDoc = {
+        $set:{
+          orders:orders
+        }
       }
-    });
+      const result = await foodColleciton.updateOne(query,updatedDoc)
+      res.send(result)
+
+    })
+
+    
+
     
 
 
