@@ -58,6 +58,7 @@ async function run() {
     const foodColleciton = database.collection("FoodCollection");
     const userCollection = database.collection("Users");
     const addedFoodCollection = database.collection("AddedFoodCollection");
+    const orderedList = database.collection("OrderedList");
 
 
 
@@ -88,7 +89,6 @@ async function run() {
       const id = req.params.id
       const query = {_id: new ObjectId(id)}
 
-
       const result = await foodColleciton.findOne(query)
       res.send(result)
     })
@@ -105,6 +105,25 @@ async function run() {
       }
     })
 
+// Check if the order is duplicated
+app.get('/duplicate-order/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await orderedList.findOne({ _id: id }, { _id: 1 });
+    if (result) {
+      res.send({ matched: true });
+    } else {
+      res.send({ matched: false });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'Server error' });
+  }
+});
+
+
+
+
     // Store user in database
     app.post('/user',async(req,res)=>{
       const user = req.body
@@ -120,14 +139,24 @@ async function run() {
       res.send(result)      
     })
 
+    // Add ordered food
+    app.post('/add-ordered-food',async(req,res)=>{
+      const food = req.body
+      console.log(food)
+      const result = await orderedList.insertOne(food)
+      res.send(result)      
+    })
+
+    
     // update orders count
     app.patch('/orders-count',async(req,res)=>{
       const {id} = req.body
       const orders = req.body.orders
-        // const orders = req.body.orders
-        console.log(orders)
-
+      // const orders = req.body.orders
+      console.log(orders)
+      
       const query = {_id:new ObjectId(id)}
+    
       const updatedDoc = {
         $set:{
           orders:orders
@@ -138,7 +167,9 @@ async function run() {
 
     })
 
-    
+
+  
+
 
     
 
