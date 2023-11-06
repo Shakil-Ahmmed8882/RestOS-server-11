@@ -1,13 +1,13 @@
 [
       {
-        "foodName": "Spaghetti Bolognese",
+        "foodName": "Spaghetti",
         "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
         "foodCategory": "Italian",
         "price": 12.99,
         "orders": 0,
         "quantity": 250,
-        "made by": "Chef Mario",
-        "food origin": "Italy",
+        "made_by": "Chef Mario",
+        "food_origin": "Italy",
         "description": "A classic Italian dish made with pasta, ground beef, tomato sauce, and aromatic herbs.",
          "reviews": [
             {
@@ -31,26 +31,26 @@
           ]
       },
       {
-        "foodName": "Sushi Rolls",
+        "foodName": "Sushi ",
         "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
         "foodCategory": "Japanese",
         "price": 16.99,
         "orders": 0,
         "quantity": 150,
-        "made by": "Sushi Master Yuki",
-        "food origin": "Japan",
+        "made_by": "Sushi Master Yuki",
+        "food_origin": "Japan",
         "description": "Delicious sushi rolls with fresh fish, rice, and seaweed, served with soy sauce and wasabi.",
         "reviews":[]
       },
       {
-        "foodName": "Chicken Tikka Masala",
+        "foodName": "Chicken",
         "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
         "foodCategory": "Indian",
         "price": 14.99,
         "orders": 0,
         "quantity": 200,
-        "made by": "Chef Patel",
-        "food origin": "India",
+        "made_by": "Chef Patel",
+        "food_origin": "India",
         "description": "Tender pieces of chicken in a creamy tomato-based sauce with aromatic Indian spices.",
         "reviews": [
             {
@@ -80,8 +80,8 @@
         "price": 8.99,
         "orders": 0,
         "quantity": 300,
-        "made by": "Grill Master Jack",
-        "food origin": "United States",
+        "made_by": "Grill Master Jack",
+        "food_origin": "United States",
         "description": "Classic hamburger with a juicy patty, lettuce, tomato, and special sauce.",
         "reviews":[]
       },
@@ -92,8 +92,8 @@
         "price": 11.99,
         "orders": 0,
         "quantity": 180,
-        "made by": "Chef Nong",
-        "food origin": "Thailand",
+        "made_by": "Chef Nong",
+        "food_origin": "Thailand",
         "description": "Stir-fried rice noodles with shrimp, tofu, and a tangy tamarind sauce.",
         "reviews": [
             {
@@ -123,8 +123,8 @@
         "price": 10.99,
         "orders": 0,
         "quantity": 220,
-        "made by": "Pizza Chef Luigi",
-        "food origin": "Italy",
+        "made_by": "Pizza Chef Luigi",
+        "food_origin": "Italy",
         "description": "Traditional Italian pizza with tomato sauce, mozzarella, and fresh basil.",
         "reviews":[]
       },
@@ -135,8 +135,8 @@
         "price": 18.99,
         "orders": 0,
         "quantity": 160,
-        "made by": "Sushi Chef Hiroshi",
-        "food origin": "Japan",
+        "made_by": "Sushi Chef Hiroshi",
+        "food_origin": "Japan",
         "description": "Assortment of fresh raw fish slices served with pickled ginger and wasabi.",
         "reviews": [
             {
@@ -160,14 +160,14 @@
           ]
       },
       {
-        "foodName": "Chana Masala",
+        "foodName": "Chana ",
         "foodImage": "https://www.pixelstalk.net/wp-content/uploads/2016/08/Fresh-hot-delicious-food-wallpaper.jpg",
         "foodCategory": "Indian",
         "price": 13.99,
         "orders": 0,
         "quantity": 190,
-        "made by": "Chef Priya",
-        "food origin": "India",
+        "made_by": "Chef Priya",
+        "food_origin": "India",
         "description": "A flavorful chickpea curry with spices and herbs, perfect for vegetarians.",
         "reviews":[]
       },
@@ -178,8 +178,8 @@
         "price": 14.99,
         "orders": 0,
         "quantity": 280,
-        "made by": "Pitmaster Bill",
-        "food origin": "United States",
+        "made_by": "Pitmaster Bill",
+        "food_origin": "United States",
         "description": "Slow-cooked, tender barbecue ribs with a smoky and tangy sauce.",
         "reviews":[]
       },
@@ -190,8 +190,8 @@
         "price": 12.99,
         "orders": 0,
         "quantity": 175,
-        "made by": "Chef Achara",
-        "food origin": "Thailand",
+        "made_by": "Chef Achara",
+        "food_origin": "Thailand",
         "description": "A spicy Thai curry with coconut milk, chicken, and aromatic herbs.",
         "reviews":[]
       },
@@ -202,8 +202,8 @@
         "price": 11.99,
         "orders": 0,
         "quantity": 210,
-        "made by": "Chef Gabriella",
-        "food origin": "Italy",
+        "made_by": " Gabriella",
+        "food_origin": "Italy",
         "description": "Layered pasta dish with ricotta, mozzarella, and a rich meat sauce.",
         "reviews":[]
       },
@@ -214,8 +214,8 @@
         "price": 4.99,
         "orders": 0,
         "quantity": 350,
-        "made by": "Soup Master Yuki",
-        "food origin": "Japan",
+        "made_by": "Soup Master Yuki",
+        "food_origin": "Japan",
         "description": "A traditional Japanese soup with soybean paste, tofu, and seaweed.",
         "reviews":[]
       },
@@ -226,8 +226,8 @@
         "price": 9.99,
         "orders": 0,
         "quantity": 190,
-        "made by": "Ramen Chef Yuki",
-        "food origin": "Japan",
+        "made_by": "Ramen Chef Yuki",
+        "food_origin": "Japan",
         "description": "Japanese noodle soup with savory broth, pork, and various toppings.",
         "reviews":[]
       },
@@ -238,8 +238,8 @@
         "price": 13.99,
         "orders": 0,
         "quantity": 210,
-        "made by": "Chef Arjun",
-        "food origin": "India",
+        "made_by": "Chef Arjun",
+        "food_origin": "India",
         "description": "A fragrant and flavorful Indian rice dish with spices, meat, and vegetables.",
         "reviews":[]
       },
@@ -250,8 +250,8 @@
         "price": 10.99,
         "orders": 0,
         "quantity": 180,
-        "made by": "Pho Chef Linh",
-        "food origin": "Vietnam",
+        "made_by": "Pho Chef Linh",
+        "food_origin": "Vietnam",
         "description": "Vietnamese noodle soup with a rich, aromatic broth, beef, and fresh herbs.",
         "reviews":[]
       },
@@ -262,8 +262,8 @@
         "price": 2.99,
         "orders": 0,
         "quantity": 280,
-        "made by": "Samosa Maker Priya",
-        "food origin": "India",
+        "made_by": "Samosa Maker Priya",
+        "food_origin": "India",
         "description": "Deep-fried pastry filled with spiced potatoes, peas, and other ingredients.",
         "reviews":[]
       },
@@ -274,8 +274,8 @@
         "price": 9.99,
         "orders": 0,
         "quantity": 250,
-        "made by": "Fish and Chips Shop John",
-        "food origin": "United Kingdom",
+        "made_by": "Fish and Chips Shop John",
+        "food_origin": "United Kingdom",
         "description": "Classic British dish with battered fish and deep-fried potato chips.",
         "reviews":[]
       },
@@ -286,8 +286,8 @@
         "price": 7.99,
         "orders": 50,
         "quantity": 320,
-        "made by": "Taco Chef Maria",
-        "food origin": "Mexico",
+        "made_by": "Taco Chef Maria",
+        "food_origin": "Mexico",
         "description": "Mexican street food with folded tortillas, various fillings, and salsa.",
         "reviews":[]
       },
@@ -298,9 +298,12 @@
         "price": 18.99,
         "orders": 23,
         "quantity": 170,
-        "made by": "Duck Master Li",
-        "food origin": "China",
+        "made_by": "Duck Master Li",
+        "food_origin": "China",
         "description": "Crispy roasted duck dish with thin pancakes, hoisin sauce, and sliced scallions.",
         "reviews":[]
       }
     ]
+
+
+    

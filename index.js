@@ -6,6 +6,11 @@ const port = process.env.PORT || 5000;
 const cors = require("cors");
 const cookieParser = require('cookie-parser')
 
+
+//|| MONGODB connection
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.sk8jxpx.mongodb.net/?retryWrites=true&w=majority`;
+
 //middle ware
 app.use(express.json());
 app.use(
@@ -34,9 +39,7 @@ const verifyToken = (req, res, next) => {
 
 
 
-//|| MONGODB connection
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.sk8jxpx.mongodb.net/?retryWrites=true&w=majority`;
+
 
 // Creating a MongoClient 
 const client = new MongoClient(uri, {
@@ -53,13 +56,12 @@ async function run() {
     //Creating database and colleciton 
     const database = client.db("RestOS");
     const foodColleciton = database.collection("FoodCollection");
+    const userCollection = database.collection("Users");
+    const addedFoodCollection = database.collection("AddedFoodCollection");
 
 
 
-
-
-
-    // GET ALL FOOD
+    // GET ALL FOODS
     app.get("/foods", async (req, res) => {
       try{
         const result = await foodColleciton.find().toArray();
@@ -81,8 +83,43 @@ async function run() {
       }
     });
 
+    // Get single food
+    app.get('/food/:id',async(req,res)=> {
+      const id = req.params.id
+      const query = {_id: new ObjectId(id)}
+      console.log(id)
 
+      const result = await foodColleciton.findOne(query)
+      res.send(result)
+    })
 
+    // Store user in database
+    app.post('/user',async(req,res)=>{
+      const user = req.body
+      const result = await userCollection.insertOne(user)
+      res.send(result)
+      
+    })
+
+    // Add food item 
+    app.post('/add-food',async(req,res)=>{
+      const food = req.body
+      const result = await addedFoodCollection.insertOne(food)
+      res.send(result)      
+    })
+
+    // added food collection
+    app.get("/added-food", async (req, res) => {
+      try {
+        const { email } = req.query;
+        console.log(email)
+        const result = await addedFoodCollection.find({ add_by: email }).toArray();
+        res.send(result);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+    
 
 
 
