@@ -53,7 +53,7 @@ async function run() {
     const addedFoodCollection = database.collection("AddedFoodCollection");
     const orderedList = database.collection("OrderedList");
 
-    // GET ALL FOODS
+    // GET ALL FOODS (Pagination)
     app.get("/foods", async (req, res) => {
       // getting current page 
       const page = parseInt(req.query.page) || 1; 
@@ -135,6 +135,17 @@ async function run() {
         res.status(500).send({ error: "Server error" });
       }
     });
+
+    // Get Ordered list
+    app.get("/ordered-list", async (req, res) => {
+      try {
+        const result = await orderedList.find().toArray()
+        res.send(result);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
 
     // Store user in database
     app.post("/user", async (req, res) => {
