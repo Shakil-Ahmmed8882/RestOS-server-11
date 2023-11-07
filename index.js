@@ -138,8 +138,9 @@ async function run() {
 
     // Get Ordered list
     app.get("/ordered-list", async (req, res) => {
+      const {email} = req.query
       try {
-        const result = await orderedList.find().toArray()
+        const result = await orderedList.find({email:email}).toArray()
         res.send(result);
       } catch (err) {
         console.log(err);
@@ -170,7 +171,7 @@ async function run() {
     });
 
     // update orders count
-    app.patch("/orders-count", async (req, res) => {
+    app.patch("/modify-orders", async (req, res) => {
       const { id } = req.body;
       const orders = req.body.orders;
       // const orders = req.body.orders
@@ -186,6 +187,14 @@ async function run() {
       const result = await foodColleciton.updateOne(query, updatedDoc);
       res.send(result);
     });
+
+
+    // delete ordered food
+    app.delete('/cancel-ordered-food/:id',async(req,res)=> {
+      const {id} = req.params
+      const result = await orderedList.deleteOne({_id:id})
+      res.send(result)
+    })
 
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
