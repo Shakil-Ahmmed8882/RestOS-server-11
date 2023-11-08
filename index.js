@@ -5,6 +5,7 @@ require("dotenv").config();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+ACCESS_TOKEN = '4309dc9bbdfd1b9140ac84fc1678da930b2996d5f3143c41998df82a597b3c939747514b88dc019b1a73f3f610f0fcb2caad09f60cd82728a033238556491c27'
 
 //|| MONGODB connection
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
@@ -14,7 +15,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173",'http://localhost:5173'],
     credentials: true,
   })
 );
@@ -23,10 +24,11 @@ app.use(cookieParser());
 // verify token
 const verifyToken = (req, res, next) => {
   const token = req?.cookies?.token;
+  console.log(token)
   if (!token) {
     res.status(401).send({ message: "Unauthorized access" });
   }
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+  jwt.verify(token, ACCESS_TOKEN, (err, decoded) => {
     if (err) {
       return res.status(403).send({ message: "Unathorized access" });
     }
@@ -55,12 +57,6 @@ async function run() {
 
 
 
-  //  Authetication
-  app.get('/jwt',async(req,res)=>{
-    
-  })
-
-
     // GET ALL FOODS (Pagination)
     app.get("/foods", async (req, res) => {
       // getting current page 
@@ -69,7 +65,6 @@ async function run() {
 
       const skip = (page - 1) * size;
       
-
       try {
         const result = await foodColleciton.find().skip(skip).limit(size).toArray();
         res.send(result);
@@ -106,8 +101,10 @@ async function run() {
     });
 
     // Get single food
-    app.get("/food/:id", async (req, res) => {
+    app.get("/food/:id", verifyToken, async (req, res) => {
+
       const id = req.params.id;
+
       const query = { _id: new ObjectId(id) };
 
       const result = await foodColleciton.findOne(query);
@@ -197,11 +194,6 @@ async function run() {
       const {id} = req.params
       const food = req.body
 
-
-
-      console.log('iiiiiiid',id)
-      console.log('fooooooooooooooooooooooooooooooooooooooood',food)
-      
       const optionns = {upsert:true}
       const updatedDoc = {
         $set: {
@@ -253,6 +245,23 @@ async function run() {
       const result = await orderedList.deleteOne({_id:id})
       res.send(result)
     })
+
+
+
+
+    //  Authetication
+    app.post('/jwt',async(req,res)=>{
+      const user = req.body
+
+      const token = jwt.sign(user, ACCESS_TOKEN, { expiresIn: '1h' });
+      res
+      .cookie('token',token,{
+        httpOnly:true,
+        secure:false
+      }).send({success:true})
+    })
+
+  
 
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
