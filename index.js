@@ -53,11 +53,19 @@ async function run() {
     const addedFoodCollection = database.collection("AddedFoodCollection");
     const orderedList = database.collection("OrderedList");
 
+
+
+  //  Authetication
+  app.get('/jwt',async(req,res)=>{
+    
+  })
+
+
     // GET ALL FOODS (Pagination)
     app.get("/foods", async (req, res) => {
       // getting current page 
       const page = parseInt(req.query.page) || 1; 
-      const size = parseInt(req.query.size); 
+      const size = parseInt(req.query.size) || 9; 
 
       const skip = (page - 1) * size;
       
@@ -110,29 +118,27 @@ async function run() {
     app.get("/added-food", async (req, res) => {
       try {
         const { email } = req.query;
-        console.log(email);
+        const { id } = req.query;
+
+        let query = {}
+
+        if(email){
+           query = {add_by:email}
+        }
+
+        if(id){
+          query = {_id:new ObjectId(id)}
+        }
+
+
+
         const result = await addedFoodCollection
-          .find({ add_by: email })
+          .find(query)
           .toArray();
+          console.log(result)
         res.send(result);
       } catch (err) {
         console.log(err);
-      }
-    });
-
-    // Check if the order is duplicated
-    app.get("/duplicate-order/:id", async (req, res) => {
-      const id = req.params.id;
-      try {
-        const result = await orderedList.findOne({ _id: id }, { _id: 1 });
-        if (result) {
-          res.send({ matched: true });
-        } else {
-          res.send({ matched: false });
-        }
-      } catch (error) {
-        console.error(error);
-        res.status(500).send({ error: "Server error" });
       }
     });
 
@@ -146,6 +152,16 @@ async function run() {
         console.log(err);
       }
     });
+
+    // get single data to update
+    app.get('/food/:name',async(req,res)=>{
+      const {name} = req.params
+
+      console.log(name)
+
+      const result = await foodColleciton.findOne({_id:new ObjectId(id)})
+      res.send(result)
+    })
 
 
     // Store user in database
@@ -165,17 +181,59 @@ async function run() {
     // Add ordered food
     app.post("/add-ordered-food", async (req, res) => {
       const food = req.body;
-      console.log(food);
+
+      const isExist = await orderedList.findOne({email:food.email,foodName:food.foodName})
+      
+      if(isExist){
+        return res.send({isExist:true})
+      } 
       const result = await orderedList.insertOne(food);
       res.send(result);
     });
+
+
+    // update food
+    app.put('/update-food/:id',async(req,res)=>{
+      const {id} = req.params
+      const food = req.body
+
+
+
+      console.log('iiiiiiid',id)
+      console.log('fooooooooooooooooooooooooooooooooooooooood',food)
+      
+      const optionns = {upsert:true}
+      const updatedDoc = {
+        $set: {
+          name:food.name,
+          img:food.img,
+          category:food.category,
+          price:food.price,
+          quantity:food.quantity,
+          add_by:food.add_by,
+          origin:food.origin,
+          description:food.description,
+          orderedDate:food.orderedDate,
+          email:food.email,
+          foodCategory:food.foodCategory,
+          foodImage:food.foodImage,
+          foodName:food.foodName,
+          food_origin:food.food_origin,
+          made_by:food.made_by,
+          orders:food.orders,
+        },
+      };
+        const result = await addedFoodCollection.updateOne({_id:new ObjectId(id)},updatedDoc,optionns)
+        res.send(result)
+
+      })
 
     // update orders count
     app.patch("/modify-orders", async (req, res) => {
       const { id } = req.body;
       const orders = req.body.orders;
       // const orders = req.body.orders
-      console.log(orders);
+      console.log('orders is ', orders);
 
       const query = { _id: new ObjectId(id) };
 
@@ -186,7 +244,7 @@ async function run() {
       };
       const result = await foodColleciton.updateOne(query, updatedDoc);
       res.send(result);
-    });
+      });
 
 
     // delete ordered food
