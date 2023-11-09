@@ -15,7 +15,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173",'http://localhost:5173'],
+    origin: ["http://localhost:5173"],
     credentials: true,
   })
 );
@@ -101,7 +101,7 @@ async function run() {
     });
 
     // Get single food
-    app.get("/food/:id", verifyToken, async (req, res) => {
+      app.get("/food/:id", verifyToken, async (req, res) => {
 
       const id = req.params.id;
 
@@ -242,7 +242,9 @@ async function run() {
     // delete ordered food
     app.delete('/cancel-ordered-food/:id',async(req,res)=> {
       const {id} = req.params
-      const result = await orderedList.deleteOne({_id:id})
+
+
+      const result = await orderedList.deleteOne({_id:new ObjectId(id)})
       res.send(result)
     })
 
