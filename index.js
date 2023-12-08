@@ -5,7 +5,8 @@ require("dotenv").config();
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-ACCESS_TOKEN = '4309dc9bbdfd1b9140ac84fc1678da930b2996d5f3143c41998df82a597b3c939747514b88dc019b1a73f3f610f0fcb2caad09f60cd82728a033238556491c27'
+ACCESS_TOKEN =
+  "4309dc9bbdfd1b9140ac84fc1678da930b2996d5f3143c41998df82a597b3c939747514b88dc019b1a73f3f610f0fcb2caad09f60cd82728a033238556491c27";
 
 //|| MONGODB connection
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
@@ -15,16 +16,22 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://restos-748ac.web.app",
+      "https://restos-748ac.firebaseapp.com",
+    ],
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 
 // verify token
 const verifyToken = (req, res, next) => {
   const token = req?.cookies?.token;
-  console.log(token)
+  console.log(token);
   if (!token) {
     res.status(401).send({ message: "Unauthorized access" });
   }
@@ -55,18 +62,20 @@ async function run() {
     const addedFoodCollection = database.collection("AddedFoodCollection");
     const orderedList = database.collection("OrderedList");
 
-
-
     // GET ALL FOODS (Pagination)
     app.get("/foods", async (req, res) => {
-      // getting current page 
-      const page = parseInt(req.query.page) || 1; 
-      const size = parseInt(req.query.size) || 9; 
+      // getting current page
+      const page = parseInt(req.query.page) || 1;
+      const size = parseInt(req.query.size) || 9;
 
       const skip = (page - 1) * size;
-      
+
       try {
-        const result = await foodColleciton.find().skip(skip).limit(size).toArray();
+        const result = await foodColleciton
+          .find()
+          .skip(skip)
+          .limit(size)
+          .toArray();
         res.send(result);
       } catch (err) {
         console.log(err);
@@ -85,7 +94,6 @@ async function run() {
       }
     });
 
-
     // 6 TOP SELLING FOOD
     app.get("/top-selling-food", async (req, res) => {
       try {
@@ -101,8 +109,7 @@ async function run() {
     });
 
     // Get single food
-      app.get("/food/:id", verifyToken, async (req, res) => {
-
+    app.get("/food/:id", async (req, res) => {
       const id = req.params.id;
 
       const query = { _id: new ObjectId(id) };
@@ -117,53 +124,65 @@ async function run() {
         const { email } = req.query;
         const { id } = req.query;
 
-        let query = {}
+        let query = {};
 
-        if(email){
-           query = {add_by:email}
+        if (email) {
+          query = { add_by: email };
         }
 
-        if(id){
-          query = {_id:new ObjectId(id)}
+        if (id) {
+          query = { _id: new ObjectId(id) };
         }
 
-
-
-        const result = await addedFoodCollection
-          .find(query)
-          .toArray();
-          console.log(result)
+        const result = await addedFoodCollection.find(query).toArray();
+        console.log(result);
         res.send(result);
       } catch (err) {
         console.log(err);
       }
     });
 
-    // Get Ordered list
+    // Get individual Ordered list
     app.get("/ordered-list", async (req, res) => {
-      const {email} = req.query
+      const { email } = req.query;
+      const { status } = req.query;
+
       try {
-        const result = await orderedList.find({email:email}).toArray()
-        res.send(result);
+        // Getting orderlist
+        if (status == "pending") {
+          const orderedFoods = await orderedList
+            .find({ email: email, status: "pending" })
+            .toArray();
+          res.send(orderedFoods);
+        } else {
+          // Getting the pruchased list
+          const purchasedFoods = await orderedList
+            .find({ email: email, status: "confirmed" })
+            .toArray();
+          res.send(purchasedFoods);
+        }
       } catch (err) {
         console.log(err);
       }
     });
 
     // get single data to update
-    app.get('/food/:name',async(req,res)=>{
-      const {name} = req.params
+    app.get("/food/:name", async (req, res) => {
+      const { name } = req.params;
 
-      console.log(name)
+      console.log(name);
 
-      const result = await foodColleciton.findOne({_id:new ObjectId(id)})
-      res.send(result)
-    })
-
+      const result = await foodColleciton.findOne({ _id: new ObjectId(id) });
+      res.send(result);
+    });
 
     // Store user in database
     app.post("/user", async (req, res) => {
       const user = req.body;
+      const existingUser = await userCollection.findOne({ email: user?.email });
+      if (existingUser) {
+        return res.send({ isExist: true });
+      }
       const result = await userCollection.insertOne(user);
       res.send(result);
     });
@@ -179,53 +198,61 @@ async function run() {
     app.post("/add-ordered-food", async (req, res) => {
       const food = req.body;
 
-      const isExist = await orderedList.findOne({email:food.email,foodName:food.foodName})
-      
-      if(isExist){
-        return res.send({isExist:true})
-      } 
+      const isExist = await orderedList.findOne({
+        email: food.email,
+        foodName: food.foodName,
+      });
+
+      if (isExist) {
+        return res.send({ isExist: true });
+      }
+
+      // pending until the admin confirm the order
+      food.status = "pending";
       const result = await orderedList.insertOne(food);
       res.send(result);
     });
 
-
     // update food
-    app.put('/update-food/:id',async(req,res)=>{
-      const {id} = req.params
-      const food = req.body
+    app.put("/update-food/:id", async (req, res) => {
+      const { id } = req.params;
+      const food = req.body;
 
-      const optionns = {upsert:true}
+      const optionns = { upsert: true };
       const updatedDoc = {
         $set: {
-          name:food.name,
-          img:food.img,
-          category:food.category,
-          price:food.price,
-          quantity:food.quantity,
-          add_by:food.add_by,
-          origin:food.origin,
-          description:food.description,
-          orderedDate:food.orderedDate,
-          email:food.email,
-          foodCategory:food.foodCategory,
-          foodImage:food.foodImage,
-          foodName:food.foodName,
-          food_origin:food.food_origin,
-          made_by:food.made_by,
-          orders:food.orders,
+          name: food.name,
+          img: food.img,
+          category: food.category,
+          price: food.price,
+          quantity: food.quantity,
+          add_by: food.add_by,
+          origin: food.origin,
+          description: food.description,
+          orderedDate: food.orderedDate,
+          email: food.email,
+          foodCategory: food.foodCategory,
+          foodImage: food.foodImage,
+          foodName: food.foodName,
+          food_origin: food.food_origin,
+          made_by: food.made_by,
+          orders: food.orders,
         },
       };
-        const result = await addedFoodCollection.updateOne({_id:new ObjectId(id)},updatedDoc,optionns)
-        res.send(result)
-
-      })
+      const result = await addedFoodCollection.updateOne(
+        { _id: new ObjectId(id) },
+        updatedDoc,
+        optionns
+      );
+      res.send(result);
+    });
 
     // update orders count
     app.patch("/modify-orders", async (req, res) => {
       const { id } = req.body;
       const orders = req.body.orders;
       // const orders = req.body.orders
-      console.log('orders is ', orders);
+      console.log("orders is ", orders);
 
       const query = { _id: new ObjectId(id) };
 
@@ -236,34 +263,75 @@ async function run() {
       };
       const result = await foodColleciton.updateOne(query, updatedDoc);
       res.send(result);
-      });
-
+    });
 
     // delete ordered food
-    app.delete('/cancel-ordered-food/:id',async(req,res)=> {
-      const {id} = req.params
+    app.delete("/cancel-ordered-food/:id", async (req, res) => {
+      const { id } = req.params;
 
-
-      const result = await orderedList.deleteOne({_id:new ObjectId(id)})
-      res.send(result)
-    })
-
-
-
+      const result = await orderedList.deleteOne({ _id: new ObjectId(id) });
+      res.send(result);
+    });
 
     //  Authetication
-    app.post('/jwt',async(req,res)=>{
-      const user = req.body
+    app.post("/jwt", async (req, res) => {
+      const user = req.body;
 
-      const token = jwt.sign(user, ACCESS_TOKEN, { expiresIn: '1h' });
+      const token = jwt.sign(user, ACCESS_TOKEN, { expiresIn: "1h" });
       res
-      .cookie('token',token,{
-        httpOnly:true,
-        secure:false
-      }).send({success:true})
-    })
+        .cookie("token", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        })
+        .send({ success: true });
+    });
 
-  
+    // ======== Admin =========
+    // ========================
+    app.get("/All-orders", async (req, res) => {
+      const result = await orderedList.find({ status: "pending" }).toArray();
+      console.log(result);
+      res.send(result);
+    });
+    // GET ALL THE PURCHASED LIST
+    app.get("/all-purchased-list", async (req, res) => {
+      const result = await orderedList.find({ status: "confirmed" }).toArray();
+      console.log(result);
+      res.send(result);
+    });
+
+    // Checking the role
+    app.get("/isAdmin", async (req, res) => {
+      const { email } = req.query;
+      
+      const userRole = await userCollection.findOne(
+        { email: email },
+        { projection: { _id: false, role: 1 } }
+      );
+
+      // console.log(userRole?.role)
+      if(userRole){
+        const isAdmin = userRole?.role == "admin"
+        res.send({ isAdmin});
+      }
+      
+
+    });
+    // Confirm orders and change the status pending to confirmed
+    app.patch("/confirm-order", async (req, res) => {
+      const { id } = req.query;
+      const updatedDoc = {
+        $set: {
+          status: "confirmed",
+        },
+      };
+      const result = await orderedList.updateOne(
+        { _id: new ObjectId(id) },
+        updatedDoc
+      );
+      res.send(result);
+    });
 
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
