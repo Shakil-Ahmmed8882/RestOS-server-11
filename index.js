@@ -10,7 +10,8 @@ ACCESS_TOKEN =
 
 //|| MONGODB connection
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.sk8jxpx.mongodb.net/?retryWrites=true&w=majority`;
+// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.sk8jxpx.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://RestaurantManagementSystem:VvORLvvbBbIXOxvo@cluster0.sk8jxpx.mongodb.net/?retryWrites=true&w=majority`;
 
 //middle ware
 app.use(express.json());
